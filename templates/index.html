@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pencil Art Effects</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+
+        input,
+        select,
+        button {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>🖋️ Pencil & Art Effect Generator</h2>
+
+    <form id="uploadForm" action="/sketch" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required><br>
+        <select name="mode">
+            <option value="bw">🖤 Black & White Sketch</option>
+            <option value="color">🎨 Color Pencil Sketch</option>
+            <option value="cartoon">🤪 Cartoon Effect</option>
+            <option value="oil">🖌️ Oil Painting</option>
+        </select><br>
+        <button type="submit" class="btn">Generate</button>
+    </form>
+
+    {% if image_url %}
+    <h3>🖼️ Your Result:</h3>
+    <img src="{{ image_url }}">
+    <br>
+    <a href="{{ image_url }}" download="sketch.jpg">
+        <button class="btn">📥 Download</button>
+    </a>
+    {% endif %}
+</body>
+
+</html>
