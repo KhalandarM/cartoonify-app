@@ -3,7 +3,7 @@ services:
     name: cartoonify-app
     env: python
     buildCommand: ""
-    startCommand: python app.py
+    startCommand: python pencil_sketch_app.py
     envVars:
       - key: FLASK_ENV
         value: production
