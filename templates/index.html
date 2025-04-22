@@ -1,67 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Pencil Art Effects</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <title>Cartoonify - Mobile Sketch App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            margin: 0;
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(to bottom right, #ffecd2, #fcb69f);
+            color: #333;
             text-align: center;
             padding: 20px;
-            background: #f0f0f0;
         }
 
-        input,
-        select,
-        button {
-            padding: 10px;
-            margin: 10px;
+        .container {
+            background: white;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
+        h1 {
+            margin-top: 0;
+            font-size: 26px;
+            color: #444;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 12px;
             border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, #36d1dc, #5b86e5);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
             margin-top: 10px;
         }
 
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            padding: 10px 20px;
+        button:hover {
+            background: linear-gradient(to right, #5b86e5, #36d1dc);
         }
 
-        .btn:hover {
-            background-color: #45a049;
+        img.result-image {
+            width: 100%;
+            border-radius: 12px;
+            margin-top: 20px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .download-btn {
+            margin-top: 15px;
+            text-decoration: none;
+            display: block;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <h2>🖋️ Pencil & Art Effect Generator</h2>
+    <div class="container">
+        <h1>🎨 Sketchify App</h1>
+        <form method="POST" action="/sketch" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" required>
+            <select name="mode" required>
+                <option value="bw">🖤 Black & White Sketch</option>
+                <option value="color">🖍️ Color Pencil Sketch</option>
+                <option value="cartoon">🎭 Cartoon Effect</option>
+                <option value="oil">🎨 Oil Painting</option>
+            </select>
+            <button type="submit">✨ Generate</button>
+        </form>
 
-    <form id="uploadForm" action="/sketch" method="POST" enctype="multipart/form-data">
-        <input type="file" name="image" required><br>
-        <select name="mode">
-            <option value="bw">🖤 Black & White Sketch</option>
-            <option value="color">🎨 Color Pencil Sketch</option>
-            <option value="cartoon">🤪 Cartoon Effect</option>
-            <option value="oil">🖌️ Oil Painting</option>
-        </select><br>
-        <button type="submit" class="btn">Generate</button>
-    </form>
-
-    {% if image_url %}
-    <h3>🖼️ Your Result:</h3>
-    <img src="{{ image_url }}">
-    <br>
-    <a href="{{ image_url }}" download="sketch.jpg">
-        <button class="btn">📥 Download</button>
-    </a>
-    {% endif %}
+        {% if image_url %}
+        <img class="result-image" src="{{ image_url }}" alt="Sketch Result">
+        <a class="download-btn" href="{{ image_url }}" download="sketch_result.jpg">
+            <button>⬇️ Download</button>
+        </a>
+        {% endif %}
+    </div>
 </body>
 
 </html>
